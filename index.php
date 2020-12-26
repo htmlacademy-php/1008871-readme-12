@@ -36,8 +36,6 @@ $card_list = [
 'avatar' => '/userpic.jpg'
 ]
 
-
-
 ];
 
 
