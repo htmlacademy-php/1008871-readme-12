@@ -1,7 +1,40 @@
 <?php
 $is_auth = rand(0, 1);
-
 $user_name = 'Nika'; // укажите здесь ваше имя
+/*Объявление массива*/
+$card_list = [
+['title' => 'Цитата',
+'type' => 'post-quote',
+'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
+'user_name' => 'Лариса',
+'avatar' => '/userpic-larisa-small.jpg'
+],
+['title' => 'Игра престолов',
+'type' => 'post-text',
+'content' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+'user_name' => 'Владик',
+'avatar' => '/userpic.jpg'
+],
+['title' => 'Наконец, обработал фотки!',
+'type' => 'post-photo',
+'content' => '/rock-medium.jpg',
+'user_name' => 'Виктор',
+'avatar' => '/userpic-mark.jpg'
+],
+['title' => 'Моя мечта',
+'type' => 'post-photo',
+'content' => '/coast-medium.jpg',
+'user_name' => 'Лариса',
+'avatar' => '/userpic-larisa-small.jpg'
+],
+['title' => 'Лучшие курсы',
+'type' => 'post-link',
+'content' => 'www.htmlacademy.ru',
+'user_name' => 'Владик',
+'avatar' => '/userpic.jpg'
+]
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -60,7 +93,7 @@ $user_name = 'Nika'; // укажите здесь ваше имя
                         </a>
                     </li>
                 </ul>
-<?php endif; ?>
+<?php endif; ?> 
 <?php if ($is_auth==1): ?>
                 <!-- здесь должен быть PHP код, который показывает следующий тег по условию -->
                 <ul class="header__user-nav">
@@ -204,8 +237,8 @@ $user_name = 'Nika'; // укажите здесь ваше имя
                 </ul>
             </div>
         </div>
-        <div class="popular__posts">
-             <?php foreach ($card_list as $key => $val): ?>
+        <div class="popular__posts">   
+        <?php foreach ($card_list as $key => $val): ?>
             <article class="<?=$val['post-quote'];?> popular__post post">
             
                 <header class="post__header">
@@ -213,10 +246,8 @@ $user_name = 'Nika'; // укажите здесь ваше имя
                 </header>
                 <div class="post__main">
  <!--здесь содержимое карточки-->
-            <?php $r='post-quote';  ?>
-            <?php $r1='post-link';  ?>
-            <?php $r2='post-photo';  ?>
-            <?php if ($val['type']==$r):  ?>
+            
+            <?php if ($val['type']=='post-quote'):  ?>
 <!--содержимое для поста-цитаты-->
                 <blockquote>
                     <p>
@@ -224,7 +255,7 @@ $user_name = 'Nika'; // укажите здесь ваше имя
                     </p>
                     <cite>Неизвестный Автор</cite>
                 </blockquote>
-<?php elseif ($val['type']==$r1): ?>
+<?php elseif ($val['type']=='post-link'): ?>
                 <!--содержимое для поста-ссылки-->
                 <div class="post-link__wrapper">
                     <a class="post-link__external" href="http://" title="Перейти по ссылке">
@@ -239,7 +270,7 @@ $user_name = 'Nika'; // укажите здесь ваше имя
                         <span><?=$val['content'];?></a></span>
                     </a>
                 </div>
-<?php elseif ($val['type']==$r2): ?>
+<?php elseif ($val['type']=='post-photo'): ?>
                 <!--содержимое для поста-фото-->
                 <div class="post-photo__image-wrapper">
                     <img src="img/<?=$val['content']; ?>" alt="Фото от пользователя" width="360" height="240">
@@ -247,7 +278,6 @@ $user_name = 'Nika'; // укажите здесь ваше имя
 <?php else: ?>
 <?=$val['content'];?>
 <?php endif; ?> 
-
                 </div>
                 <footer class="post__footer">
                     <div class="post__author">
@@ -291,6 +321,7 @@ $user_name = 'Nika'; // укажите здесь ваше имя
         </div>
     </div>
 </section>
+
 <footer class="footer">
     <div class="footer__wrapper">
         <div class="footer__container container">
