@@ -5,31 +5,31 @@ $user_name = 'Nika'; // укажите здесь ваше имя
 $card_list = [
 ['title' => 'Цитата',
 'type' => 'post-quote',
-'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
+'content' => htmlspecialchars('Мы в жизни любим только раз, а после ищем лишь похожих'),
 'user_name' => 'Лариса',
 'avatar' => '/userpic-larisa-small.jpg'
 ],
 ['title' => 'Игра престолов',
 'type' => 'post-text',
-'content' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+'content' => htmlspecialchars('Не могу дождаться начала финального сезона своего любимого сериала!'),
 'user_name' => 'Владик',
 'avatar' => '/userpic.jpg'
 ],
 ['title' => 'Наконец, обработал фотки!',
 'type' => 'post-photo',
-'content' => '/rock-medium.jpg',
+'content' => htmlspecialchars('/rock-medium.jpg'),
 'user_name' => 'Виктор',
 'avatar' => '/userpic-mark.jpg'
 ],
 ['title' => 'Моя мечта',
 'type' => 'post-photo',
-'content' => '/coast-medium.jpg',
+'content' => htmlspecialchars('/coast-medium.jpg'),
 'user_name' => 'Лариса',
 'avatar' => '/userpic-larisa-small.jpg'
 ],
 ['title' => 'Лучшие курсы',
 'type' => 'post-link',
-'content' => 'www.htmlacademy.ru',
+'content' => htmlspecialchars('www.htmlacademy.ru'),
 'user_name' => 'Владик',
 'avatar' => '/userpic.jpg'
 ]
@@ -93,8 +93,6 @@ $card_list = [
                         </a>
                     </li>
                 </ul>
-<?php endif; ?> 
-<?php if ($is_auth==1): ?>
                 <!-- здесь должен быть PHP код, который показывает следующий тег по условию -->
                 <ul class="header__user-nav">
                     <li class="header__profile">
@@ -239,7 +237,7 @@ $card_list = [
         </div>
         <div class="popular__posts">   
         <?php foreach ($card_list as $key => $val): ?>
-            <article class="<?=$val['post-quote'];?> popular__post post">
+            <article class="popular__post post <?=$val['type'];?>">
             
                 <header class="post__header">
                     <h2><?=$val['title'];?></h2>
@@ -247,7 +245,7 @@ $card_list = [
                 <div class="post__main">
  <!--здесь содержимое карточки-->
             
-            <?php if ($val['type']=='post-quote'):  ?>
+<?php if ($val['type']=='post-quote'):  ?>
 <!--содержимое для поста-цитаты-->
                 <blockquote>
                     <p>
@@ -274,6 +272,32 @@ $card_list = [
                 <!--содержимое для поста-фото-->
                 <div class="post-photo__image-wrapper">
                     <img src="img/<?=$val['content']; ?>" alt="Фото от пользователя" width="360" height="240">
+                </div>
+<?php elseif ($val['type']==''): ?>
+<!--содержимое для поста-видео-->
+                <div class="post-video__block">
+                    <div class="post-video__preview">
+                        <?=embed_youtube_cover(/* вставьте ссылку на видео */); ?>
+                        <img src="img/coast-medium.jpg" alt="Превью к видео" width="360" height="188">
+                    </div>
+                    <a href="post-details.html" class="post-video__play-big button">
+                        <svg class="post-video__play-big-icon" width="14" height="14">
+                            <use xlink:href="#icon-video-play-big"></use>
+                        </svg>
+                        <span class="visually-hidden">Запустить проигрыватель</span>
+                    </a>
+                </div>
+<?php elseif ($val['type']==''): ?>
+<!--содержимое для поста-текста-->
+                <p><!--здесь текст--></p>
+            </div>
+
+            <article class="popular__post post">
+                <header class="post__header">
+                    <h2><!--здесь заголовок--></h2>
+                </header>
+                <div class="post__main">
+                    <!--здесь содержимое карточки-->
                 </div>
 <?php else: ?>
 <?=$val['content'];?>
