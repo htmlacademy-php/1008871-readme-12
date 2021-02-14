@@ -148,7 +148,6 @@ $card_list = [
                     </ul>
                 </nav>
             <?php endif; ?> 
-
         </div>
     </div>
 </header>
